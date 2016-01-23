@@ -30,8 +30,6 @@ Route::get('/', function () {
 
     Redis::publish('test-channel', json_encode($data));
 
-    return 'Done';
-
     // 2. Node.js + Redis subscribes to even
     /*
      * Node will run from the project root folder's 'socket.js' file to
@@ -40,8 +38,12 @@ Route::get('/', function () {
      */
 
     // 3. Use Socket.io to emit to all clients
-
-    //return view('welcome');
+    /*
+     * Added the emit event from Socket.io on the server side to the socket.js file
+     *
+     * The next step is to add in the client side socket.io
+     */
+    return view('welcome');
 });
 
 /*

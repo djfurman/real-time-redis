@@ -17,7 +17,8 @@ redis.on('message', function(channel, message){
     //console.log(message);
 
     message = JSON.parse(message);
-    console.log("New User has joined: " + message.data.username);
+
+    io.emit(channel + ':' + message.event, message.data);
 })
 
 server.listen(3000);
