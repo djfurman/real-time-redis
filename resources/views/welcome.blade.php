@@ -38,7 +38,7 @@
                 ready: function(){
                     //...start listening for any UserSignedUp news on the test-channel wire
                     //       then, use Vue's data driven reactivity to display the real-time content
-                    socket.on('test-channel:UserSignedUp', function(data) {
+                    socket.on('test-channel:App\\Events\\UserSignedUp', function(data) {
                        this.users.push(data.username);
                     }.bind(this));
                 }
