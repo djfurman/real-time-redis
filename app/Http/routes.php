@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Redis;
+
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -11,12 +13,34 @@
 |
 */
 
-use Illuminate\Support\Facades\Redis;
 
 Route::get('/', function () {
-    Redis::set('name', 'Daniel');
+    /*
+     * Goals for the demonstration of combining Laravel, Redis, Node & Socket.io
+     */
 
-    return Redis::get('name');
+    // 1. Publish Event with Redis
+
+    $data = [
+        'event' => 'UserSignedUp',
+        'data' => [
+            'username' => 'John Doe'
+        ]
+    ];
+
+    Redis::publish('test-channel', json_encode($data));
+
+    return 'Done';
+
+    // 2. Node.js + Redis subscribes to even
+    /*
+     * Node will run from the project root folder's 'socket.js' file to
+     *   Read from Redis
+     *   Log to the console
+     */
+
+    // 3. Use Socket.io to emit to all clients
+
     //return view('welcome');
 });
 
