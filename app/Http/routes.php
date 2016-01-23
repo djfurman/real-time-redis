@@ -11,8 +11,13 @@
 |
 */
 
+use Illuminate\Support\Facades\Redis;
+
 Route::get('/', function () {
-    return view('welcome');
+    Redis::set('name', 'Daniel');
+
+    return Redis::get('name');
+    //return view('welcome');
 });
 
 /*
